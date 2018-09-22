@@ -4,7 +4,7 @@ from marsten.markov import Markov
 from marsten.codec import MarstenCodec
 
 G = "\n".join( open(x).read() for x in sys.argv[2:] )
-M = Markov(history=6).fit(G)
+M = Markov(history=5).fit(G)
 C = MarstenCodec(M)
 
 import pickle
