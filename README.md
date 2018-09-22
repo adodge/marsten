@@ -16,3 +16,4 @@ echo "This is a test" | python encode.py bible.model > encoded.txt
 
 # Decode your message
 < encoded.txt python decode.py bible.model
+```
