@@ -110,11 +110,19 @@ class MarstenCodec(object):
 
         return bytes(data)
 
-    def encode(self, plaintext):
+    def encode(self, plaintext, verbose=False):
         code = []
+        size0 = len(plaintext)
+        ncodes = 0
         while plaintext:
             code0,plaintext = self._encode(plaintext)
             code.append(code0)
+            ncodes += len(code0)
+            size1 = size0 - len(plaintext)
+            if verbose:
+                print("%d/%d encoded (%.2f%%) in %d messages (%d codes) (%.2f codes/byte)" % \
+                        (size1, size0, 100*size1/size0, len(code), ncodes, ncodes/size1 if size1 else 0),
+                        file=sys.stderr)
         return self.model.serialize(code)
 
     def decode(self, code):
